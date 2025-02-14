@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #ffcccc; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container { 
+            position: relative; 
+        }
+        h1 { 
+            color: red; 
+            transition: transform 0.3s ease-in-out; 
+        }
+        button { 
+            padding: 12px 24px; 
+            font-size: 18px; 
+            margin: 10px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px; 
+            transition: transform 0.3s, background-color 0.3s; 
+        }
+        button:hover { 
+            transform: scale(1.1); 
+        }
+        .yes-btn { 
+            background-color: #ff4d4d; 
+            color: white; 
+        }
+        .no-btn { 
+            background-color: #ddd; 
+            color: black; 
+            position: absolute; 
+        }
+        .hidden { 
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="question">Can you be my Valentine? ❤️</h1>
+        <button class="yes-btn" onclick="sayYes()">Yes</button>
+        <button class="no-btn" id="noBtn" onclick="askAgain()">No</button>
+    </div>
+
+    <script>
+        let attempts = 0;
+        const responses = ["Are you sure?", "Really sure?", "Think again...", "Last chance!", "You can't say no!", "Just say yes! ❤️"];
+        
+        function sayYes() {
+            document.getElementById("question").innerText = "Yay! ❤️ I love you bebe ko! Muah 😘";
+            document.getElementById("question").style.transform = "scale(1.2)";
+            document.getElementById("noBtn").classList.add("hidden");
+        }
+
+        function askAgain() {
+            if (attempts < responses.length) {
+                document.getElementById("noBtn").innerText = responses[attempts];
+                attempts++;
+                moveButton();
+            } else {
+                document.getElementById("noBtn").classList.add("hidden");
+            }
+        }
+
+        function moveButton() {
+            let noBtn = document.getElementById("noBtn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
